@@ -32,3 +32,7 @@ val Typography = Typography(
     )
     */
 )
+
+val CardTypography = Typography(
+
+)

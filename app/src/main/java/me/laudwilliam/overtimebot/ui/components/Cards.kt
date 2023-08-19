@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -35,78 +36,61 @@ fun CardColumnPreview()
             .fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        CardColumn(
+        MainActivityCardColumn(
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(.8f)
+                .padding(20.dp)
         )
     }
 }
 
+
+data class ThemeInfo (val background : Color, val onBackground: Color)
+
 @Composable
-fun CardColumn(modifier: Modifier)
+fun MainActivityCardColumn(modifier: Modifier)
 {
     Row(modifier = modifier) {
-        Column(
-            modifier = Modifier.padding(20.dp).weight(1f)
-
-        ) {
-            val shiftsAvailableModifier = Modifier.fillMaxHeight(.4f)
-                .fillMaxWidth()
-            val timeBlocksLeftModifier = Modifier.weight(1f)
-                .fillMaxWidth()
-            CustomCard(header = "7", body = "Shifts available",
-                modifier = shiftsAvailableModifier, colorType = CardTheme.WHITE)
-            CustomCard(header = "10", body = "Blocks available",
-                modifier = timeBlocksLeftModifier, colorType = CardTheme.BLUE)
+        Column (modifier = Modifier.weight(1f).fillMaxHeight()){
+            MainActivityCard(
+                Modifier,
+                "10",
+                "Shifts available",
+                CardTheme.BLACK
+            )
+            Spacer(modifier = Modifier)
+            MainActivityCard(
+                Modifier,
+                "101",
+                "Time blocks remaining",
+                CardTheme.WHITE
+            )
         }
-        Divider(color = Color.Red,
-                    modifier = Modifier
-                        .fillMaxHeight()  //fill the max height
-                        .width(1.dp))
-        Column(
-            modifier = Modifier.weight(1f)
-        ) {
-            val shiftsTakenModifier = Modifier.fillMaxHeight()
-                .fillMaxWidth()
-            CustomCard(
-                header = "101",
-                body = "Shifts selected",
-                modifier = shiftsTakenModifier,
-                colorType = CardTheme.BLACK
+        Spacer(modifier = Modifier.fillMaxHeight().width(10.dp))
+        Divider()
+        Spacer(modifier = Modifier.fillMaxHeight().width(10.dp))
+        Column (modifier = Modifier.weight(1f).fillMaxHeight()){
+            MainActivityCard(
+                Modifier,
+                "2",
+                "Shifts taken",
+                CardTheme.BLUE
             )
         }
     }
 }
 
-data class ThemeInfo (val background : Color, val onBackground: Color)
 @Composable
-fun CustomCard(header: String, body: String, modifier: Modifier, colorType: CardTheme)
+fun MainActivityCard(modifier: Modifier, header: String, body: String, theme: CardTheme)
 {
-    val theme : ThemeInfo = when (colorType) {
-        CardTheme.BLACK -> ThemeInfo(MaterialTheme.colorScheme.tertiary,
-            MaterialTheme.colorScheme.onTertiary)
-        CardTheme.BLUE -> ThemeInfo(MaterialTheme.colorScheme.primary,
-            MaterialTheme.colorScheme.onPrimary)
-        CardTheme.WHITE -> ThemeInfo(MaterialTheme.colorScheme.secondary,
-            MaterialTheme.colorScheme.onSecondary)
-    }
-    Card(
-        modifier = modifier
-            .background(theme.background, RoundedCornerShape(10.dp))
-    ){
-        Text(
-            text = header,
-            style = MaterialTheme.typography.headlineSmall,
-            color = theme.onBackground
-            )
+    Card(modifier = modifier) {
+        Text(text = header, style = MaterialTheme.typography.bodyLarge)
         Spacer(modifier = Modifier.weight(1f))
-        Column {
-            Text(text = body, style = MaterialTheme.typography.bodySmall,
-                color = theme.onBackground)
-            Spacer(modifier = Modifier.weight(1f))
-            Text(text = ">", style = MaterialTheme.typography.bodySmall,
-                color = theme.onBackground)
+        Row(modifier = Modifier) {
+            Text(text = body, style = MaterialTheme.typography.bodySmall)
+            Spacer(modifier = Modifier.weight(1f).fillMaxHeight())
+            Text(text = ">")
         }
     }
 }

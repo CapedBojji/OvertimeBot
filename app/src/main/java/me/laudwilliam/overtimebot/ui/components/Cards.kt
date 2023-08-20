@@ -21,60 +21,74 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import me.laudwilliam.overtimebot.datatypes.CardTheme
 import me.laudwilliam.overtimebot.ui.theme.CardTypography
+import me.laudwilliam.overtimebot.ui.theme.JostFontFamily
+import me.laudwilliam.overtimebot.ui.theme.OvertimeBotTheme
 
 @Preview(widthDp = 437, heightDp = 936)
 @Composable
 fun CardColumnPreview()
 {
-    Box(
-        modifier = Modifier
-            .fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        MainActivityCardColumn(
+    OvertimeBotTheme {
+        Box(
             modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(.8f)
-                .padding(20.dp)
-        )
+                .fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            MainActivityCardColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(.6f)
+                    .padding(20.dp)
+            )
+        }
     }
+
 }
-
-
-data class ThemeInfo (val background : Color, val onBackground: Color)
 
 @Composable
 fun MainActivityCardColumn(modifier: Modifier)
 {
     Row(modifier = modifier) {
-        Column (modifier = Modifier.weight(1f).fillMaxHeight()){
+        Column (modifier = Modifier
+            .fillMaxHeight()
+            .weight(1f)){
             MainActivityCard(
-                Modifier,
+                Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(.6f),
                 "10",
-                "Shifts available",
+                "Shifts Available",
                 CardTheme.BLACK
             )
-            Spacer(modifier = Modifier)
+            Spacer(modifier = Modifier
+                .fillMaxWidth()
+                .height(10.dp))
             MainActivityCard(
-                Modifier,
+                Modifier.weight(1f),
                 "101",
-                "Time blocks remaining",
+                "Time Blocks",
                 CardTheme.WHITE
             )
         }
-        Spacer(modifier = Modifier.fillMaxHeight().width(10.dp))
-        Divider()
-        Spacer(modifier = Modifier.fillMaxHeight().width(10.dp))
-        Column (modifier = Modifier.weight(1f).fillMaxHeight()){
+        Spacer(modifier = Modifier
+            .fillMaxHeight()
+            .width(10.dp))
+        Spacer(modifier = Modifier
+            .fillMaxHeight()
+            .width(10.dp))
+        Column (modifier = Modifier
+            .fillMaxHeight()
+            .weight(1f)){
             MainActivityCard(
-                Modifier,
+                Modifier.fillMaxHeight(),
                 "2",
-                "Shifts taken",
+                "Shifts Taken",
                 CardTheme.BLUE
             )
         }
@@ -82,15 +96,25 @@ fun MainActivityCardColumn(modifier: Modifier)
 }
 
 @Composable
-fun MainActivityCard(modifier: Modifier, header: String, body: String, theme: CardTheme)
+fun MainActivityCard(modifier: Modifier, header: String, body: String, theme: CardTheme, )
 {
     Card(modifier = modifier) {
-        Text(text = header, style = MaterialTheme.typography.bodyLarge)
-        Spacer(modifier = Modifier.weight(1f))
-        Row(modifier = Modifier) {
-            Text(text = body, style = MaterialTheme.typography.bodySmall)
-            Spacer(modifier = Modifier.weight(1f).fillMaxHeight())
-            Text(text = ">")
+        Column (modifier = Modifier.padding(10.dp)) {
+            Text(text = header, style = MaterialTheme.typography.bodyLarge)
+            Spacer(modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f))
+            Row(modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(.40f),
+                verticalAlignment = Alignment.Bottom) {
+                Text(text = body, style = MaterialTheme.typography.bodySmall)
+                Spacer(modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight())
+                Text(text = ">", style = MaterialTheme.typography.bodySmall)
+            }
         }
+
     }
 }

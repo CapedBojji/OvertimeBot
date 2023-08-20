@@ -1,6 +1,7 @@
 package me.laudwilliam.overtimebot.ui.theme
 
 import androidx.compose.material3.Typography
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -8,7 +9,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import me.laudwilliam.overtimebot.R
 
-private val JostFontFamily = FontFamily(
+val JostFontFamily = FontFamily(
     Font(
         R.font.jost_regular,
         weight = FontWeight.Normal
@@ -19,15 +20,15 @@ private val JostFontFamily = FontFamily(
     )
 )
 
-private val JostVariableWeight = Font(R.font.jost )
 // Set of Material typography styles to start with
 val Typography = Typography(
     bodyLarge = TextStyle(
         fontFamily = JostFontFamily,
         fontWeight = FontWeight.Bold,
-        fontSize = 32.sp,
+        fontSize = 50.sp,
         lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
+        letterSpacing = 0.5.sp,
+        background = Color.Transparent
     ),
     bodySmall = TextStyle(
         fontFamily = JostFontFamily,
@@ -35,6 +36,18 @@ val Typography = Typography(
         fontSize = 16.sp,
         lineHeight = 0.sp,
         letterSpacing = 0.sp
+    ),
+    titleLarge = TextStyle(
+        fontFamily = JostFontFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 24.sp,
+        lineHeight = 0.sp,
+        letterSpacing = 0.sp
+    ),
+    titleMedium = TextStyle(
+        fontFamily = JostFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 15.sp
     )
     /* Other default text styles to override
     titleLarge = TextStyle(
